@@ -1,0 +1,18 @@
+<gallery [images]="images" [showGallery]="showGallery" (show)="onShowModalGallery($event)"></gallery>
+
+<div class="ng-overlay" *ngIf="opened">
+  <div class="ng-gallery-content">
+    <div class="uil-ring-css" *ngIf="loading">
+      <div></div>
+    </div>
+
+    <upperButtons [image]="currentImage" [showDownload]="showDownloadButton" [showExtUrl]="showExtUrlButton"
+                  (close)="closeGallery()" (download)="downloadImage()"></upperButtons>
+
+    <a class="nav-left" *ngIf="(images)?.length > 1" (click)="prevImage()"><i class="fa fa-angle-left"></i></a>
+    <img *ngIf="!loading" src="{{ currentImage.img }}" (click)="nextImage(clickAction)" class="effect"
+         (swipeleft)="swipe(currentImageIndex, $event.type)" (swiperight)="swipe(currentImageIndex, $event.type)"/>
+    <a class="nav-right" *ngIf="(images)?.length > 1" (click)="nextImage()"><i class="fa fa-angle-right"></i></a>
+    <span class="info-text">{{getDescriptionToDisplay()}}</span>
+  </div>
+</div>

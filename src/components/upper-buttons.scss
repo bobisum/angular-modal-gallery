@@ -1,0 +1,15 @@
+a {
+  &.close-popup {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 16px;
+    float: right;
+    color: #fff !important;
+    text-decoration: none;
+    cursor: pointer;
+    &::after {
+      content: 'Close';
+    }
+  }
+}

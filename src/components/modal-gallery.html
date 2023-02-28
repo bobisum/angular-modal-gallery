@@ -1,0 +1,32 @@
+<gallery [images]="images" [showGallery]="showGallery" (show)="onShowModalGallery($event)"></gallery>
+
+<div class="ng-overlay" *ngIf="opened">
+  <div class="ng-gallery-content">
+    <div class="uil-ring-css" *ngIf="loading">
+      <div></div>
+    </div>
+
+    <div class="modal-gallery-header">
+      <upperButtons [image]="currentImage" [showDownload]="showDownloadButton" [showExtUrl]="showExtUrlButton"
+                    (close)="closeGallery()" (download)="downloadImage()"></upperButtons>
+      <span class="info-text">{{getDescriptionToDisplay()}}</span>
+    </div>
+
+    <div class="modal-image-container">
+      <a class="nav-left" *ngIf="(images)?.length > 1" (click)="prevImage()">
+        <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 1L2 9L10 17" stroke="white" stroke-width="2"/>
+        </svg>        
+      </a>
+
+      <img class="image-wrapper" *ngIf="!loading" src="{{ currentImage.img }}" (click)="nextImage(clickAction)"
+           (swipeleft)="swipe(currentImageIndex, $event.type)" (swiperight)="swipe(currentImageIndex, $event.type)"/>
+  
+      <a class="nav-right" *ngIf="(images)?.length > 1" (click)="nextImage()">
+        <svg width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 17L9 9L1 0.999999" stroke="white" stroke-width="2"/>
+        </svg>        
+      </a>
+    </div>
+  </div>
+</div>
